@@ -1,6 +1,6 @@
-package view;
+package database.view;
 
-import view.AuthenticationFrame;
+import database.view.AuthenticationFrame;
 import javax.swing.JOptionPane;
 
 public class Main {

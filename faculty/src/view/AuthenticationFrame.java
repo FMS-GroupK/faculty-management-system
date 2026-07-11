@@ -1,4 +1,4 @@
-package view;
+package database.view;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -381,7 +381,7 @@ public class AuthenticationFrame extends JFrame implements ActionListener {
         } else if (signInStudentRadio.isSelected()) {
             return "Student";
         } else {
-        return "Lecturer";
+            return "Lecturer";
         }
     }
     private String getSignUpRole() {
