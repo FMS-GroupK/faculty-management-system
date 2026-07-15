@@ -1,5 +1,7 @@
 package database;
 
+import com.faculty.util.UITheme;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -22,37 +24,42 @@ public class StudentCoursesEnrolled extends JFrame implements ActionListener {
         this.studentName = studentName;
 
         setTitle("Student - Courses Enrolled");
-        setSize(1000, 600);
-        setLocation(380, 150);
+        UITheme.applyStandardBounds(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         Container container = getContentPane();
-        container.setBackground(Color.white);
+        container.setBackground(UITheme.WHITE);
         container.setLayout(null);
 
         //-------------------------------------Left Side Panel-------------------------------------------
 
         //Left side panel
         JPanel leftSidePanel = new JPanel();
-        leftSidePanel.setBounds(0, 0, 300, 600);
-        leftSidePanel.setBackground(Color.darkGray);
+        leftSidePanel.setBounds(0, 0, 300, UITheme.FRAME_HEIGHT);
+        leftSidePanel.setBackground(UITheme.PRIMARY);
         leftSidePanel.setLayout(new BoxLayout(leftSidePanel, BoxLayout.Y_AXIS));
         container.add(leftSidePanel);
 
+        //University of Kelaniya logo
+        JLabel logoLabel = new JLabel(UITheme.loadLogo(70, 70));
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leftSidePanel.add(Box.createVerticalStrut(30));
+        leftSidePanel.add(logoLabel);
+
         //Welcome message
         JLabel welcomeLabel = new JLabel("Welcome, " + studentName);
-        welcomeLabel.setFont(new Font("Cambria Math", Font.BOLD, 22));
-        welcomeLabel.setForeground(Color.white);
+        welcomeLabel.setFont(UITheme.FONT_HEADING);
+        welcomeLabel.setForeground(UITheme.WHITE);
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         welcomeLabel.setMaximumSize(new Dimension(300, 40));
-        leftSidePanel.add(Box.createVerticalStrut(40));
+        leftSidePanel.add(Box.createVerticalStrut(15));
         leftSidePanel.add(welcomeLabel);
 
         //Profile details button
         profileDetailsButton = new JButton("Profile Details");
         styleSidebarButton(profileDetailsButton, false);
-        leftSidePanel.add(Box.createVerticalStrut(200));
+        leftSidePanel.add(Box.createVerticalStrut(150));
         leftSidePanel.add(profileDetailsButton);
 
         //Timetable button
@@ -63,14 +70,14 @@ public class StudentCoursesEnrolled extends JFrame implements ActionListener {
 
         //Course enrolled button
         coursesEnrolledButton = new JButton("Courses Enrolled");
-        styleSidebarButton(coursesEnrolledButton, true); // this is the active screen
+        styleSidebarButton(coursesEnrolledButton, true);
         leftSidePanel.add(Box.createVerticalStrut(30));
         leftSidePanel.add(coursesEnrolledButton);
 
         //Logout button
         logoutButton = new JButton("Logout");
         styleSidebarButton(logoutButton, false);
-        leftSidePanel.add(Box.createVerticalStrut(30));
+        leftSidePanel.add(Box.createVerticalStrut(90));
         leftSidePanel.add(logoutButton);
 
         //------------------------------------------Right Side Content----------------------------------------
@@ -78,8 +85,8 @@ public class StudentCoursesEnrolled extends JFrame implements ActionListener {
         //Title
         JLabel titleLabel = new JLabel("Courses Enrolled");
         titleLabel.setBounds(550, 40, 300, 40);
-        titleLabel.setFont(new Font("Cambria Math", Font.BOLD, 30));
-        titleLabel.setForeground(Color.black);
+        titleLabel.setFont(UITheme.FONT_TITLE);
+        titleLabel.setForeground(UITheme.PRIMARY);
         container.add(titleLabel);
 
         String[] columnNames = {"Course Code", "Course Name", "Credits", "Grade"};
@@ -93,8 +100,10 @@ public class StudentCoursesEnrolled extends JFrame implements ActionListener {
         //Table
         JTable table = new JTable(tableModel);
         table.setRowHeight(30);
-        table.setFont(new Font("Cambria Math", Font.PLAIN, 14));
-        table.getTableHeader().setFont(new Font("Cambria Math", Font.BOLD, 14));
+        table.setFont(UITheme.FONT_LABEL);
+        table.getTableHeader().setBackground(UITheme.TABLE_HEADER);
+        table.getTableHeader().setForeground(UITheme.WHITE);
+        table.getTableHeader().setFont(UITheme.FONT_LABEL_BOLD);
 
         //Scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
@@ -112,9 +121,9 @@ public class StudentCoursesEnrolled extends JFrame implements ActionListener {
 
     //Style for all buttons
     private void styleSidebarButton(JButton button, boolean active) {
-        button.setFont(new Font("Cambria Math", Font.BOLD, 16));
-        button.setBackground(active ? Color.lightGray : Color.white);
-        button.setForeground(Color.darkGray);
+        button.setFont(UITheme.FONT_LABEL_BOLD);
+        button.setBackground(active ? UITheme.ROW_ALT : UITheme.WHITE);
+        button.setForeground(UITheme.PRIMARY);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setMaximumSize(new Dimension(200, 30));
