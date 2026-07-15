@@ -1,5 +1,7 @@
 package database;
 
+import com.faculty.util.UITheme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,37 +24,42 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         this.studentName = studentName;
 
         setTitle("Student - Profile Details");
-        setSize(1000, 600);
-        setLocation(380, 150);
+        UITheme.applyStandardBounds(this);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         Container container = getContentPane();
-        container.setBackground(Color.white);
+        container.setBackground(UITheme.WHITE);
         container.setLayout(null);
 
         //-------------------------------------Left Side Panel-------------------------------------------
 
         //Left side panel
         JPanel leftSidePanel = new JPanel();
-        leftSidePanel.setBounds(0, 0, 300, 600);
-        leftSidePanel.setBackground(Color.darkGray);
+        leftSidePanel.setBounds(0, 0, 300, UITheme.FRAME_HEIGHT);
+        leftSidePanel.setBackground(UITheme.PRIMARY);
         leftSidePanel.setLayout(new BoxLayout(leftSidePanel, BoxLayout.Y_AXIS));
         container.add(leftSidePanel);
 
+        //University of Kelaniya logo
+        JLabel logoLabel = new JLabel(UITheme.loadLogo(70, 70));
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leftSidePanel.add(Box.createVerticalStrut(30));
+        leftSidePanel.add(logoLabel);
+
         //Welcome message
         JLabel welcomeLabel = new JLabel("Welcome, " + studentName);
-        welcomeLabel.setFont(new Font("Cambria Math", Font.BOLD, 22));
-        welcomeLabel.setForeground(Color.white);
+        welcomeLabel.setFont(UITheme.FONT_HEADING);
+        welcomeLabel.setForeground(UITheme.WHITE);
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         welcomeLabel.setMaximumSize(new Dimension(300, 40));
-        leftSidePanel.add(Box.createVerticalStrut(40));
+        leftSidePanel.add(Box.createVerticalStrut(15));
         leftSidePanel.add(welcomeLabel);
 
         //Profile details button
         profileDetailsButton = new JButton("Profile Details");
         styleSidebarButton(profileDetailsButton, true);
-        leftSidePanel.add(Box.createVerticalStrut(200));
+        leftSidePanel.add(Box.createVerticalStrut(150));
         leftSidePanel.add(profileDetailsButton);
 
         //Timetable button
@@ -70,7 +77,7 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Log out button
         logoutButton = new JButton("Logout");
         styleSidebarButton(logoutButton, false);
-        leftSidePanel.add(Box.createVerticalStrut(30));
+        leftSidePanel.add(Box.createVerticalStrut(90));
         leftSidePanel.add(logoutButton);
 
         //------------------------------------------Right Side Content----------------------------------------
@@ -78,14 +85,14 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Title
         JLabel titleLabel = new JLabel("Profile Details");
         titleLabel.setBounds(550, 40, 300, 40);
-        titleLabel.setFont(new Font("Cambria Math", Font.BOLD, 30));
-        titleLabel.setForeground(Color.black);
+        titleLabel.setFont(UITheme.FONT_TITLE);
+        titleLabel.setForeground(UITheme.PRIMARY);
         container.add(titleLabel);
 
         //Name
         JLabel nameLabel = new JLabel("Full Name");
         nameLabel.setBounds(380, 120, 150, 25);
-        nameLabel.setFont(new Font("Cambria Math", Font.PLAIN, 14));
+        nameLabel.setFont(UITheme.FONT_LABEL);
         container.add(nameLabel);
 
         nameField = new JTextField();
@@ -95,7 +102,7 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Student
         JLabel studentIdLabel = new JLabel("Student ID");
         studentIdLabel.setBounds(380, 180, 150, 25);
-        studentIdLabel.setFont(new Font("Cambria Math", Font.PLAIN, 14));
+        studentIdLabel.setFont(UITheme.FONT_LABEL);
         container.add(studentIdLabel);
 
         studentIdField = new JTextField();
@@ -106,7 +113,7 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Degree
         JLabel degreeLabel = new JLabel("Degree");
         degreeLabel.setBounds(380, 240, 150, 25);
-        degreeLabel.setFont(new Font("Cambria Math", Font.PLAIN, 14));
+        degreeLabel.setFont(UITheme.FONT_LABEL);
         container.add(degreeLabel);
 
         degreeField = new JTextField();
@@ -116,7 +123,7 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Email
         JLabel emailLabel = new JLabel("Email");
         emailLabel.setBounds(380, 300, 150, 25);
-        emailLabel.setFont(new Font("Cambria Math", Font.PLAIN, 14));
+        emailLabel.setFont(UITheme.FONT_LABEL);
         container.add(emailLabel);
 
         emailField = new JTextField();
@@ -126,7 +133,7 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //Mobile number
         JLabel mobileNumberLabel = new JLabel("Mobile Number");
         mobileNumberLabel.setBounds(380, 360, 150, 25);
-        mobileNumberLabel.setFont(new Font("Cambria Math", Font.PLAIN, 14));
+        mobileNumberLabel.setFont(UITheme.FONT_LABEL);
         container.add(mobileNumberLabel);
 
         mobileNumberField = new JTextField();
@@ -136,17 +143,15 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
         //New style for text fields' borders
         JTextField[] fields = { nameField, studentIdField, degreeField, emailField, mobileNumberField };
         for (JTextField field : fields) {
-            field.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-            field.setForeground(Color.darkGray);
-            field.setFont(new Font("Cambria Math", Font.PLAIN, 15));
+            UITheme.styleTextField(field);
         }
 
         //Save button
         saveButton = new JButton("Save Changes");
         saveButton.setBounds(560, 435, 200, 35);
-        saveButton.setFont(new Font("Cambria Math", Font.BOLD, 16));
-        saveButton.setBackground(Color.darkGray);
-        saveButton.setForeground(Color.white);
+        saveButton.setFont(UITheme.FONT_LABEL_BOLD);
+        saveButton.setBackground(UITheme.PRIMARY);
+        saveButton.setForeground(UITheme.WHITE);
         container.add(saveButton);
 
         //Action listeners of all buttons
@@ -161,9 +166,9 @@ public class StudentProfileDetails extends JFrame implements ActionListener {
 
     //Style for all buttons
     private void styleSidebarButton(JButton button, boolean active) {
-        button.setFont(new Font("Cambria Math", Font.BOLD, 16));
-        button.setBackground(active ? Color.lightGray : Color.white);
-        button.setForeground(Color.darkGray);
+        button.setFont(UITheme.FONT_LABEL_BOLD);
+        button.setBackground(active ? UITheme.ROW_ALT : UITheme.WHITE);
+        button.setForeground(UITheme.PRIMARY);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.setMaximumSize(new Dimension(200, 30));
